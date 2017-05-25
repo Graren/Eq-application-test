@@ -77,7 +77,6 @@ class MailScreen extends React.Component {
 
   componentWillReceiveProps(newProps){
     if (newProps.path){
-      console.tron.log('Happened')
       this.setState({path:newProps.path})
     }
   }
@@ -107,7 +106,7 @@ class MailScreen extends React.Component {
                     console.tron.log('bad')
                   }
               });   
-      NavigationActions.initScreen()
+      NavigationActions.pop({popNum: 2})
     }
     else{
       Alert.alert(
@@ -122,7 +121,6 @@ class MailScreen extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <View style={styles.container}>
         <View style={ styles.header}>
