@@ -7,5 +7,8 @@ include ':react-native-device-info'
 project(':react-native-device-info').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
 include ':react-native-config'
 project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
-
+include ':RNMail', ':app'
+project(':RNMail').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mail/android')
+include ':react-native-get-real-path'
+project(':react-native-get-real-path').projectDir = new File(settingsDir, '../node_modules/react-native-get-real-path/android')
 include ':app'

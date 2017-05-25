@@ -46,7 +46,8 @@ class LaunchScreen extends React.Component {
       .then((data) => {
         console.log(data.path)
         // this.setState({src:data.path})
-        this.props.attemptImage(data.path)
+        this.props.attemptImage(data.path.trim())
+        NavigationActions.mailScreen()
       })
       .catch(err => console.error(err));
     
@@ -99,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LaunchScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)

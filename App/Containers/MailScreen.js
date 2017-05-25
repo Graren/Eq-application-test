@@ -1,9 +1,13 @@
 import React from 'react'
-import { ScrollView, Text, Image, View, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, StyleSheet, Button, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import {  RNMail as Mailer } from 'NativeModules';
+import { connect } from 'react-redux'
+var RNGRP = require('react-native-get-real-path');
 // Styles
-// import styles from './Styles/LaunchScreenStyles'
+// import styles from './Styles/MailScreenStyles'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -11,8 +15,6 @@ const styles = StyleSheet.create({
   },
   buttonPad:{
     width: Metrics.screenWidth * 0.9,
-    backgroundColor: Colors.coal,
-    height:100,
     maxHeight:100,
     flex:1,
     flexDirection:'row',
@@ -62,25 +64,102 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class LaunchScreen extends React.Component {
-  
+class MailScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state ={
+      path: this.props.path ? this.props.path : null,
+      mailTo: '',
+      subject: '',
+      content: '',
+    }
+  }
+
+  componentWillReceiveProps(newProps){
+    if (newProps.path){
+      console.tron.log('Happened')
+      this.setState({path:newProps.path})
+    }
+  }
+
   onCameraPress(){
-    NavigationActions.launchScreen()
+    console.tron.log('SHIT')
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  handleHelp = () => {
+    if(this.validateEmail(this.state.mailTo)){
+      Mailer.mail({
+                subject: this.state.subject === ''? 'Envio Archivo': this.state.subject,
+                recipients: [this.state.mailTo],
+                body: this.state.content,
+                attachment: {
+                  path:  this.state.path,  // The absolute path of the file from which to read data.
+                  type: 'jpg',   // Mime Type: jpg, png, doc, ppt, html, pdf
+                  name: '',   // Optional: Custom filename for attachment
+                }
+              }, (error, event) => {
+                  if(error) {
+                    console.tron.log('bad')
+                  }
+              });   
+      NavigationActions.initScreen()
+    }
+    else{
+      Alert.alert(
+        'Invalid mail',
+        'Type a valid email address',
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    }
   }
 
   render () {
+    console.log(this.state)
     return (
       <View style={styles.container}>
         <View style={ styles.header}>
           <Text style={ [styles.text,{fontSize: Fonts.size.h5}] }>Emqu-test</Text>
         </View>
-        <View style={{flex:1, alignContent:'center',justifyContent:'center'}}>
+
+        <View style={{flex:2, alignContent:'center',justifyContent:'center',padding:10}}>
+          <View style={{flex:1,backgroundColor:'#F5F5F5',borderRadius:4}}>
+            <View style={{flex:1, flexDirection:'column',alignContent:'center',padding:10, paddingTop:0}}>
+            <Text style={{fontSize:Fonts.size.input}}>Mail</Text>
+            <TextInput
+              style={{height: 40,fontSize:Fonts.size.input}}
+              onChangeText={(mailTo) => this.setState({mailTo})}
+              value={this.state.mailTo}
+            />
+            </View>
+            <View style={{flex:1, flexDirection:'column',alignContent:'center',paddingHorizontal:10, paddingTop:5}}>
+            <Text style={{fontSize:Fonts.size.input}}>Subject</Text>
+            <TextInput
+              style={{height: 40,fontSize:Fonts.size.input}}
+              onChangeText={(subject) => this.setState({subject})}
+              value={this.state.subject}
+            />
+            </View>
+            <View style={{flex:1, flexDirection:'column',alignContent:'center',padding:10, paddingTop:0}}>
+            <Text style={{fontSize:Fonts.size.input}}>Body</Text>
+            <TextInput
+              style={{height: 40,fontSize:Fonts.size.input}}
+              onChangeText={(content) => this.setState({content})}
+              value={this.state.content}
+            />
+            </View>
+          </View>
           <View style={styles.buttonPad}>
-          <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
-            <Text style={styles.text}>Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
-            <Text style={styles.text}>Nfc</Text>
+          {this.state.path && <Image style={{flex:0,height:64,width:64}} source={{uri:this.state.path}}></Image>}
+          <TouchableOpacity  onPress={this.handleHelp} style={styles.button}>
+            <Text style={styles.text}>Enviar</Text>
           </TouchableOpacity>
         </View>
         </View>
@@ -88,3 +167,12 @@ export default class LaunchScreen extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) =>{
+  return {
+    path: state.image.path
+  }
+}
+
+export default connect(mapStateToProps, null)(MailScreen)
+
