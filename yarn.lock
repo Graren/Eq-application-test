@@ -4562,6 +4562,10 @@ react-native-experimental-navigation@0.26.x:
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
 
+react-native-mail@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-3.0.1.tgz#5caad29767deb5687899fab95ffbc751d45fd5af"
+
 react-native-mock@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.3.1.tgz#13d22433c5351a8a7fb8aedd7862b614d087851c"
