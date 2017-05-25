@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   }
 });
 
+
 class LaunchScreen extends React.Component {
   constructor(props){
     super(props)
@@ -45,10 +46,14 @@ class LaunchScreen extends React.Component {
       .then((data) => {
         console.log(data.path)
         // this.setState({src:data.path})
-        this.attemptImage(data.path)
+        this.props.attemptImage(data.path)
       })
       .catch(err => console.error(err));
     
+  }
+
+  shouldComponentUpdate(){
+       return false
   }
 
   render () {
@@ -83,7 +88,11 @@ class LaunchScreen extends React.Component {
     )
   }
 }
-
+const mapStateToProps = (state) =>{
+  return {
+    path: state.image.path
+  }
+}
 const mapDispatchToProps = (dispatch) => {
   return {
     attemptImage: (path) => dispatch(ImageActions.imageRequest(path))
