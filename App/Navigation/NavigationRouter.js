@@ -6,7 +6,7 @@ import NavigationDrawer from './NavigationDrawer'
 // screens identified by the router
 import LaunchScreen from '../Containers/LaunchScreen'
 import InitScreen from '../Containers/InitScreen'
-
+import MailScreen from '../Containers/MailScreen'
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
 ***************************/
@@ -18,6 +18,7 @@ class NavigationRouter extends Component {
         <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene key='drawerChildrenWrapper' navigationBarStyle={styles.navBar} titleStyle={styles.title} leftButtonIconStyle={styles.leftButton} rightButtonTextStyle={styles.rightButton}>
             <Scene key='launchScreen' component={LaunchScreen} title='LaunchScreen' hideNavBar />
+            <Scene key='mailScreen' component={MailScreen} title='mailScreen' hideNavBar />
             <Scene initial key='initScreen' component={InitScreen} title='InitScreen' hideNavBar />
           </Scene>
         </Scene>

@@ -11,7 +11,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.chirag.RNMail.*; // <--- import
+import com.rngrp.RNGRPPackage;  // <--- import
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +31,9 @@ public class MainApplication extends Application implements ReactApplication {
             new RCTCameraPackage(),
             new VectorIconsPackage(),
             new RNDeviceInfo(),
-            new ReactNativeConfigPackage()
+            new ReactNativeConfigPackage(),
+            new RNMail(),      // <------ add here
+            new RNGRPPackage() // <---------- add package
       );
     }
   };
