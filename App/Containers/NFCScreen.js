@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, Image, View, StyleSheet, Button, TouchableOpacity, Alert } from 'react-native'
+import { ScrollView, Text, Image, View, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { Images, Colors, Metrics, Fonts } from '../Themes'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 // Styles
@@ -70,19 +70,8 @@ const styles = StyleSheet.create({
 
 export default class LaunchScreen extends React.Component {
   
-  onCameraPress(){
-    NavigationActions.launchScreen()
-  }
-
-  onNFCPress(){
-    Alert.alert(
-      'Function Not implemented',
-      'NFC devices not avaliable for developer',
-      [
-        {text: 'OK', onPress: () => console.log('OK Pressed')},
-      ],
-      { cancelable: false }
-    )
+  onScan(){
+    console.log('scan')
   }
 
   render () {
@@ -93,10 +82,7 @@ export default class LaunchScreen extends React.Component {
         </View>
           <View style={{flex:10,justifyContent:'center'}}>
             <View style={styles.buttonPad}>
-              <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
-                <Text style={styles.text}>Camera</Text>
-              </TouchableOpacity>
-              <TouchableOpacity  onPress={this.onNFCPress} style={styles.button}>
+              <TouchableOpacity  onPress={this.onScan} style={styles.button}>
                 <Text style={styles.text}>NFC</Text>
               </TouchableOpacity>
             </View>
