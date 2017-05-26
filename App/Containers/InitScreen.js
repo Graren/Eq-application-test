@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
     padding:0,
     paddingHorizontal:20,
     margin:0,
+    maxHeight: Metrics.navBarHeight,
+    flex:1,
     backgroundColor: Colors.blue,
     flexDirection: 'row',
     height: Metrics.navBarHeight,
@@ -59,6 +61,10 @@ const styles = StyleSheet.create({
     color: '#000',
     padding: 10,
     margin: 10
+  },
+  footerTx:{
+    color:Colors.snow,
+
   }
 });
 
@@ -71,18 +77,21 @@ export default class LaunchScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={ styles.header}>
+        <View style={styles.header}>
           <Text style={ [styles.text,{fontSize: Fonts.size.h5}] }>Emqu-test</Text>
         </View>
-        <View style={{flex:1, alignContent:'center',justifyContent:'center'}}>
-          <View style={styles.buttonPad}>
-          <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
-            <Text style={styles.text}>Camera</Text>
-          </TouchableOpacity>
-          <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
-            <Text style={styles.text}>Nfc</Text>
-          </TouchableOpacity>
+          <View style={{flex:10,justifyContent:'center'}}>
+            <View style={styles.buttonPad}>
+              <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
+                <Text style={styles.text}>Camera</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  onPress={this.onCameraPress} style={styles.button}>
+                <Text style={styles.text}>Nfc</Text>
+              </TouchableOpacity>
+            </View>
         </View>
+        <View style={{backgroundColor: Colors.coal, flex:1,justifyContent: 'center',alignItems:'center'}}>
+          <Text style={styles.footerTx}>Made By Oscar Colmenares</Text>
         </View>
       </View>
     )

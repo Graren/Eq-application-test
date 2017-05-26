@@ -72,17 +72,9 @@ class LaunchScreen extends React.Component {
         </View>
         <View style={{backgroundColor:Colors.coal,padding:30,flex:1,justifyContent: 'center',alignItems: 'center',flexDirection:'row'}}>
             <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems: 'center'}}>
-              <View style={{borderRadius:4, margin:10,minHeight:64,minWidth:64,flex:1}}>
-              {this.state.src && <Image style={{flex:0,height:64,width:64}} source={{uri:this.state.src}}></Image>}
-            </View>
-            {/*{
-             this.state.src && (<View style={{height:100,width:100}}><Image style={{height:64,width:64,flex:0}} source={{uri:this.state.src}}></Image></View>)
-            }*/}
-          
-              <TouchableOpacity style={[styles.capture,{minHeight:64}]} onPress={this.takePicture.bind(this)}>
+              <TouchableOpacity style={[styles.capture,{minHeight:64,maxWidth:100}]} onPress={this.takePicture.bind(this)}>
                 <Icon name="camera" size={24} color={Colors.snow} />
               </TouchableOpacity>
-          
             </View>
           </View>
       </View>

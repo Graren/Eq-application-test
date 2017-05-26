@@ -122,14 +122,13 @@ class MailScreen extends React.Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={ styles.header}>
           <Text style={ [styles.text,{fontSize: Fonts.size.h5}] }>Emqu-test</Text>
         </View>
-
-        <View style={{flex:2, alignContent:'center',justifyContent:'center',padding:10}}>
+        <View style={{flex:2,justifyContent:'center',padding:10}}>
           <View style={{flex:1,backgroundColor:'#F5F5F5',borderRadius:4}}>
-            <View style={{flex:1, flexDirection:'column',alignContent:'center',padding:10, paddingTop:0}}>
+            <View style={{flex:1, flexDirection:'column',padding:10, paddingTop:0}}>
             <Text style={{fontSize:Fonts.size.input}}>Mail</Text>
             <TextInput
               style={{height: 40,fontSize:Fonts.size.input}}
@@ -137,7 +136,7 @@ class MailScreen extends React.Component {
               value={this.state.mailTo}
             />
             </View>
-            <View style={{flex:1, flexDirection:'column',alignContent:'center',paddingHorizontal:10, paddingTop:5}}>
+            <View style={{flex:1, flexDirection:'column',paddingHorizontal:10, paddingTop:5}}>
             <Text style={{fontSize:Fonts.size.input}}>Subject</Text>
             <TextInput
               style={{height: 40,fontSize:Fonts.size.input}}
@@ -155,13 +154,13 @@ class MailScreen extends React.Component {
             </View>
           </View>
           <View style={styles.buttonPad}>
-          {this.state.path && <Image style={{flex:0,height:64,width:64}} source={{uri:this.state.path}}></Image>}
-          <TouchableOpacity  onPress={this.handleHelp} style={styles.button}>
-            <Text style={styles.text}>Enviar</Text>
-          </TouchableOpacity>
+            {this.state.path && <Image style={{flex:0,height:64,width:64}} source={{uri:this.state.path}}></Image>}
+            <TouchableOpacity  onPress={this.handleHelp} style={styles.button}>
+              <Text style={styles.text}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        </View>
-      </View>
+      </ScrollView> 
     )
   }
 }
