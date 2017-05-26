@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     maxHeight:100,
     flex:1,
     flexDirection:'row',
-    justifyContent:'space-between',
+    justifyContent:'center',
     padding:20,
     alignSelf:'center',
   },
@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     padding:0,
     paddingHorizontal:20,
     margin:0,
+    flex:1,
+    maxHeight: Metrics.navBarHeight,
     backgroundColor: Colors.blue,
     flexDirection: 'row',
     height: Metrics.navBarHeight,
@@ -122,45 +124,45 @@ class MailScreen extends React.Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <View style={ styles.header}>
           <Text style={ [styles.text,{fontSize: Fonts.size.h5}] }>Emqu-test</Text>
         </View>
-        <View style={{flex:2,justifyContent:'center',padding:10}}>
-          <View style={{flex:1,backgroundColor:'#F5F5F5',borderRadius:4}}>
+        <View style={{flex:1,justifyContent:'center',padding:10}}>
+          <View style={{flex:3,backgroundColor:'#F5F5F5',borderRadius:4}}>
             <View style={{flex:1, flexDirection:'column',padding:10, paddingTop:0}}>
-            <Text style={{fontSize:Fonts.size.input}}>Mail</Text>
-            <TextInput
-              style={{height: 40,fontSize:Fonts.size.input}}
-              onChangeText={(mailTo) => this.setState({mailTo})}
-              value={this.state.mailTo}
-            />
+              <Text style={{fontSize:Fonts.size.input}}>Mail</Text>
+              <TextInput
+                style={{height: 40,fontSize:Fonts.size.input}}
+                onChangeText={(mailTo) => this.setState({mailTo})}
+                value={this.state.mailTo}
+              />
             </View>
             <View style={{flex:1, flexDirection:'column',paddingHorizontal:10, paddingTop:5}}>
-            <Text style={{fontSize:Fonts.size.input}}>Subject</Text>
-            <TextInput
-              style={{height: 40,fontSize:Fonts.size.input}}
-              onChangeText={(subject) => this.setState({subject})}
-              value={this.state.subject}
-            />
+              <Text style={{fontSize:Fonts.size.input}}>Subject</Text>
+              <TextInput
+                style={{height: 40,fontSize:Fonts.size.input}}
+                onChangeText={(subject) => this.setState({subject})}
+                value={this.state.subject}
+              />
             </View>
             <View style={{flex:1, flexDirection:'column',alignContent:'center',padding:10, paddingTop:0}}>
-            <Text style={{fontSize:Fonts.size.input}}>Body</Text>
-            <TextInput
-              style={{height: 40,fontSize:Fonts.size.input}}
-              onChangeText={(content) => this.setState({content})}
-              value={this.state.content}
-            />
+              <Text style={{fontSize:Fonts.size.input}}>Body</Text>
+              <TextInput
+                style={{height: 40,fontSize:Fonts.size.input}}
+                onChangeText={(content) => this.setState({content})}
+                value={this.state.content}
+              />
             </View>
           </View>
           <View style={styles.buttonPad}>
-            {this.state.path && <Image style={{flex:0,height:64,width:64}} source={{uri:this.state.path}}></Image>}
+            {this.state.path && <Image style={{flex:1,height:64,width:64}} source={{uri:this.state.path}}></Image>}
             <TouchableOpacity  onPress={this.handleHelp} style={styles.button}>
               <Text style={styles.text}>Enviar</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView> 
+      </View> 
     )
   }
 }
